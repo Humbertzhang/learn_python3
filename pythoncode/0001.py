@@ -7,6 +7,7 @@ numset = set()
 word = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 num = '0123456789'
 
+
 while(len(numset) <=199):
     s = ''
     while(len(s) < 20):

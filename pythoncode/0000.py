@@ -6,3 +6,5 @@ draw = ImageDraw.Draw(im)
 draw.text((width-20,0),'99',fill=color)
 del draw
 im.save('avater.png','png')
+
+

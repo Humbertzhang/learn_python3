@@ -1,0 +1,4 @@
+aiohttp
+aiopg[sa]
+aiohttp-jinja2
+trafaret-config

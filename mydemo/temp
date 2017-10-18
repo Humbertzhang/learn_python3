@@ -1,0 +1,38 @@
+with
+t1(name, allcases) as 
+(
+    select name, count(*)
+    from attorneys join cases using (case_id)
+    group by name
+),
+t2(name, woncases) as
+(
+    select name, count(disposition)
+    from attorneys join cases using (case_id)
+    where disposition like 'Not Guilty'
+    group by name
+)
+select name, t1.allcases, t2.woncases*100.0/t1.allcases
+from t1 join t2 using(name)
+where t1.allcases > 100
+order by t2.woncases*100.0/t1.allcases desc
+limit 5;
+
+with
+t1(race, guiltynum) as 
+(
+    select race, count(disposition)
+    from parties join cases using (case_id)
+    where race in ('African American', 'Caucasian')
+    and disposition like 'Guilty'
+    group by race
+),
+t2(race, race_all) as
+(
+    select race, count(*)
+    from parties join cases using (case_id)
+    where race in ('African American', 'Caucasian')
+    and disposition in ('Guilty','Not Guilty')
+    group by race;
+)
+select race,

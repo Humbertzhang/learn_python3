@@ -5,7 +5,7 @@ from flask import request
 from flask import jsonify
 from ..models import User
 
-@api.route("/hotapps", methods = ['GET'])
+@api.route("/hotapps/", methods = ['GET'])
 def hotapps():
     if request.method == 'GET':
         conn = redis.StrictRedis(host='localhost',decode_responses=True, port=6379, db=0)

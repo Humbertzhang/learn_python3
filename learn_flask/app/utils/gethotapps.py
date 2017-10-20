@@ -20,7 +20,7 @@ def gethot():
             html = f.readlines()
 
         content += html[12:108]
-        sleep(0.2)
+        sleep(0.5)
 
         
     content = content[::-1]
@@ -42,7 +42,7 @@ def gethot():
 
     #pprint(apps)
     #pprint(apps.keys())
-    conn = redis.StrictRedis(host='localhost',decode_responses=True, port=6379, db=0)
+    conn = redis.StrictRedis(host='127.0.0.1',decode_responses=True, port=6379, db=0)
     conn.hmset("hotapps", apps)
     #utfapps = conn.hgetall("hotapps")
     #pprint(utfapps)

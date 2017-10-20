@@ -13,7 +13,7 @@ def gethot():
     content = []
     for i in range(1,40):
         r = requests.get('http://app.mi.com/topList?page=' + str(i), headers = head)
-        soup = BeautifulSoup(r.text)
+        soup = BeautifulSoup(r.text, "html5lib")
         with open('hotdata', 'w') as f:
             f.writelines(soup.get_text("\n", strip=True))
         with open('hotdata', 'r') as f:

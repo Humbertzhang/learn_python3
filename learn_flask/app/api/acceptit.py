@@ -22,7 +22,11 @@ def acceptit():
                     "time":0
                 })
             time = content["time"]
+            print("before accept")
+            print(content)
             content["acceptter_id"] = accept_id
+            print("after")
+            print(content)
             conn.hmset(str(raiser_id), content)
             return jsonify({
                 "status":1,

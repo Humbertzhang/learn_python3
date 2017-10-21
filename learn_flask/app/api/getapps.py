@@ -4,6 +4,7 @@ from flask import request, abort
 from flask import jsonify
 from ..models import User
 
+import json
 import redis
 
 @api.route('/getapps/', methods = ['POST'])
@@ -15,5 +16,6 @@ def getapps():
         if content == {}:
             abort(404)
         else:
+            ret = json.dumps(content, ensure_ascii=False)
             conn.delete(idcode+"app")
-            return jsonify(content)
+            return ret

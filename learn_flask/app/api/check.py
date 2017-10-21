@@ -20,7 +20,6 @@ def check():
                     "status":1,
                     "time":str(content["time"])
                 })
-
         return jsonify({
             "status":0,
             "time":0

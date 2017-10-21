@@ -4,6 +4,7 @@ from flask import request, abort
 from flask import jsonify
 from ..models import User
 
+import json
 import redis
 
 @api.route('/getrecord/', methods = ['POST'])
@@ -16,5 +17,6 @@ def getrecord():
         if content == {} :
             abort(404)
         else:
+            ret = json.dumps(content, ensure_ascii=False)
             conn.delete(str(idcode) + "fin")
-            return jsonify(content)
+            return ret

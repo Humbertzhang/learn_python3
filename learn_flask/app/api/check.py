@@ -24,4 +24,4 @@ def check():
         return jsonify({
             "status":0,
             "time":0
-        })
+        }),404

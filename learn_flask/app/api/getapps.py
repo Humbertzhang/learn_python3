@@ -13,7 +13,7 @@ def getapps():
         conn = redis.StrictRedis(host='localhost',decode_responses=True, port=6379, db=0)
         content = conn.hgetall(str(idcode)+"app")
         if content == {}:
-            return jsonify({"status":0})
+            return jsonify({"status":0}),404
         else:
             conn.delete(idcode+"app")
             return jsonify(content)

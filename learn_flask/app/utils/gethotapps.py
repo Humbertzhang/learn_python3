@@ -11,7 +11,8 @@ def gethot():
 
     apps = {}
     content = []
-    for i in range(1,40):
+    for i in range(1,41):
+        print("getting hotdata:"+ str(i) + "/40")
         r = requests.get('http://app.mi.com/topList?page=' + str(i), headers = head)
         soup = BeautifulSoup(r.text, "html5lib")
         with open('hotdata', 'w') as f:
@@ -27,25 +28,23 @@ def gethot():
     record = 0
     #把游戏单独拿出来
     gametypes = ['模拟经营',  '动作枪战', '格斗快打', '体育运动', '跑酷闯关', '网游RPG', '战争策略', '赛车体育',  '棋牌桌游', '塔防迷宫', '儿童益智', '飞行空战', 'VR']
-    apps["游戏"] = []
-        
+    apps["games"] = []
+    studytypes = ['学习教育', '图书阅读', '实用工具']
+    apps['study'] = []
+    apps['other'] = []
     for i in range(len(content)):
         if i % 2 == 0:
             record = content[i].rstrip('\n')
-            if record not in apps.keys() and record not in gametypes:
-                apps[record] = []
         elif i % 2 == 1:
             if record in gametypes:
-                apps["游戏"].append(content[i].rstrip('\n'))
+                apps["games"].append(content[i].rstrip('\n'))
+            elif record in studytypes:
+                apps['study'].append(content[i].rstrip('\n'))
             else:
-                apps[record].append(content[i].rstrip('\n'))
+                apps['other'].append(content[i].rstrip('\n'))
 
-    #pprint(apps)
-    #pprint(apps.keys())
     conn = redis.StrictRedis(host='127.0.0.1',decode_responses=True, port=6379, db=0)
     conn.hmset("hotapps", apps)
-    #utfapps = conn.hgetall("hotapps")
-    #pprint(utfapps)
 
 if __name__ == '__main__':
     gethot()

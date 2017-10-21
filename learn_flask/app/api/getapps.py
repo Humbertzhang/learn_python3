@@ -1,6 +1,6 @@
 from . import api
 from .. import db
-from flask import request
+from flask import request, abort
 from flask import jsonify
 from ..models import User
 
@@ -13,7 +13,7 @@ def getapps():
         conn = redis.StrictRedis(host='localhost',decode_responses=True, port=6379, db=0)
         content = conn.hgetall(str(idcode)+"app")
         if content == {}:
-            return jsonify({"status":0}),404
+            abort(404)
         else:
             conn.delete(idcode+"app")
             return jsonify(content)

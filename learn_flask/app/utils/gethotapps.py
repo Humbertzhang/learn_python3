@@ -29,7 +29,7 @@ def gethot():
     #把游戏单独拿出来
     gametypes = ['模拟经营',  '动作枪战', '格斗快打', '体育运动', '跑酷闯关', '网游RPG', '战争策略', '赛车体育',  '棋牌桌游', '塔防迷宫', '儿童益智', '飞行空战', 'VR']
     apps["games"] = []
-    studytypes = ['学习教育', '图书阅读', '实用工具']
+    studytypes = ['学习教育', '图书阅读', '实用工具', '效率办公']
     apps['study'] = []
     apps['other'] = []
     for i in range(len(content)):

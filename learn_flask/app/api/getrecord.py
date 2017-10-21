@@ -1,6 +1,6 @@
 from . import api
 from .. import db
-from flask import request
+from flask import request, abort
 from flask import jsonify
 from ..models import User
 
@@ -13,5 +13,8 @@ def getrecord():
         conn = redis.StrictRedis(host='localhost',decode_responses=True, port=6379, db=0)
 
         content = conn.hgetall(str(idcode) + "fin")
-        conn.delete(str(idcode) + "fin")
-        return jsonify(content)
+        if content == {} :
+            abort(404)
+        else:
+            conn.delete(str(idcode) + "fin")
+            return jsonify(content)
